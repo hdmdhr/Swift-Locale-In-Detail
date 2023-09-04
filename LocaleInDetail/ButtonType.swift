@@ -21,15 +21,15 @@ enum ButtonType: Int, CustomStringConvertible {
         case .currentLocale:
             return "Locale.current"
         case .autoUpdateLocale:
-            return "Locale.autoUpdatingCurrent"
+            return "Locale.\nautoUpdatingCurrent"
         case .currentCalendar:
             return "Calendar.current"
         case .autoUpdateCalendar:
-            return "Calendar.autoupdatingCurrent"
+            return "Calendar.\nautoupdatingCurrent"
         case .preferredLang:
-            return "Locale.preferredLanguages"
+            return "Locale.\npreferredLanguages"
         case .preferredLocalizations:
-            return "Bundle.main.preferredLocalizations"
+            return "Bundle.main.\npreferredLocalizations"
         }
     }
     

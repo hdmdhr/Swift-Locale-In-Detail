@@ -24,7 +24,11 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 20) {
+            LazyVGrid(
+                columns: [GridItem(.flexible()), GridItem(.flexible())],
+                alignment: .center,
+                spacing: 20
+            ) {
                 makeButton(for: .currentLocale)
                 makeButton(for: .autoUpdateLocale)
                 
@@ -50,6 +54,8 @@ struct ContentView: View {
                     ScrollView {
                         ForEach(logs) { log in
                             Text(log.message)
+                                .font(.footnote)
+                                .fontWeight(.medium)
                                 .minimumScaleFactor(0.5)
                                 .lineLimit(2)
                                 .foregroundColor(log.color)
@@ -62,9 +68,7 @@ struct ContentView: View {
                     .cornerRadius(8)
                 }
                 .frame(
-                    minWidth: 0,
                     maxWidth: .infinity,
-                    minHeight: 0,
                     maxHeight: .infinity,
                     alignment: .topLeading
                 )
@@ -91,7 +95,7 @@ struct ContentView: View {
         case .preferredLocalizations:
             value = Bundle.main.preferredLocalizations.joined(separator: ", ")
         }
-        logs.append(LogEntry(message: "\(type.description): \(value)", type: type))
+        logs.append(LogEntry(message: "\(type.description): \n\(value)", type: type))
     }
     
     private func makeButton(for type: ButtonType) -> some View {
@@ -99,10 +103,12 @@ struct ContentView: View {
             self.log(type)
         }) {
             Text(type.varName)
+                .font(.body)
                 .fontWeight(.semibold)
                 .fontWidth(Font.Width.condensed)
                 .minimumScaleFactor(0.75)
                 .lineLimit(2)
+                .multilineTextAlignment(.leading)
                 .padding()
                 .background(type.color)
                 .foregroundColor(.white)

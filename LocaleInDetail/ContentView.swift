@@ -8,64 +8,73 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var consoleText: String = ""
+    @State private var logs: [LogEntry] = []
 
-    let labels = [
-        "Locale.current",
-        "Locale.autoUpdatingCurrent",
-        "Locale.preferredLanguages",
-        "Bundle.main.preferredLocalizations",
-    ]
-    let colors: [Color] = [
-        .blue,
-        .green,
-        .orange,
-        .purple
-    ]
+    let currentLocale = Locale.current
+    let autoUpdateLocale = Locale.autoupdatingCurrent
+    let currentCalendar = Calendar.current
+    let autoUpdateCalendar = Calendar.autoupdatingCurrent
+    
+    enum ButtonType: Int, CustomStringConvertible {
+        case currentLocale
+        case autoUpdateLocale
+        case currentCalendar
+        case autoUpdateCalendar
+        case preferredLang
+        case preferredLocalizations
+        
+        var varName: String {
+            switch self {
+            case .currentLocale: return "Locale.current"
+            case .autoUpdateLocale: return "Locale.autoUpdatingCurrent"
+            case .currentCalendar: return "Calendar.current"
+            case .autoUpdateCalendar: return "Calendar.autoupdatingCurrent"
+            case .preferredLang: return "Locale.preferredLanguages"
+            case .preferredLocalizations: return "Bundle.main.preferredLocalizations"
+            }
+        }
+        
+        var description: String {
+            switch self {
+            case .currentLocale: return "Current locale"
+            case .autoUpdateLocale: return "Auto update locale"
+            case .currentCalendar: return "Current calendar"
+            case .autoUpdateCalendar: return "Auto update calendar"
+            case .preferredLang: return "Preferred languages"
+            case .preferredLocalizations: return "Bundle preferred localizations"
+            }
+        }
+        
+        var color: Color {
+            switch self {
+            case .currentLocale: return .blue
+            case .autoUpdateLocale: return .green
+            case .currentCalendar: return .indigo
+            case .autoUpdateCalendar: return .mint
+            case .preferredLang: return .orange
+            case .preferredLocalizations: return .purple
+            }
+        }
+    }
+    
+    struct LogEntry: Identifiable {
+        let id = UUID()
+        let message: String
+        let type: ButtonType
+        var color: Color { type.color }
+    }
 
     var body: some View {
         VStack(spacing: 20) {
-            // 2x2 Grid for buttons
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 20) {
-                Button(action: {
-                    self.log(labels[0], Locale.current.identifier)
-                }) {
-                    Text(labels[0])
-                        .padding()
-                        .background(colors[0])
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-
-                Button(action: {
-                    self.log(labels[1], Locale.autoupdatingCurrent.identifier)
-                }) {
-                    Text(labels[1])
-                        .padding()
-                        .background(colors[1])
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-
-                Button(action: {
-                    self.log(labels[2], Locale.preferredLanguages.joined(separator: ", "))
-                }) {
-                    Text(labels[2])
-                        .padding()
-                        .background(colors[2])
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-
-                Button(action: {
-                    self.log(labels[3], Bundle.main.preferredLocalizations.joined(separator: ", "))
-                }) {
-                    Text(labels[3])
-                        .padding()
-                        .background(colors[3])
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
+                makeButton(for: .currentLocale)
+                makeButton(for: .autoUpdateLocale)
+                
+                makeButton(for: .currentCalendar)
+                makeButton(for: .autoUpdateCalendar)
+                
+                makeButton(for: .preferredLang)
+                makeButton(for: .preferredLocalizations)
             }
 
             GeometryReader { geo in
@@ -75,17 +84,22 @@ struct ContentView: View {
                             .font(.headline)
                         Spacer()
                         Button(action: {
-                            self.consoleText = ""
+                            self.logs.removeAll()
                         }) {
                             Image(systemName: "trash")
                         }
                     }
                     ScrollView {
-                        Text(consoleText)
-                            .padding()
-                            .frame(width: geo.size.width, height: .infinity)
+                        ForEach(logs) { log in
+                            Text(log.message)
+                                .minimumScaleFactor(0.5)
+                                .lineLimit(2)
+                                .foregroundColor(log.color)
+                                .padding(.bottom, 2)
+                                .frame(width: geo.size.width, alignment: .leading)
+                        }
                     }
-                    .frame(width: geo.size.width, height: .infinity, alignment: .leading)
+                    .frame(width: geo.size.width)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
                 }
@@ -103,9 +117,41 @@ struct ContentView: View {
         .padding()
     }
 
-    func log(_ name: String, _ value: Any) {
-        consoleText += "\(name): \(value)\n"
+    private func log(_ type: ButtonType) {
+        let value: Any
+        switch type {
+        case .currentLocale:
+            value = currentLocale.identifier
+        case .autoUpdateLocale:
+            value = autoUpdateLocale.identifier
+        case .currentCalendar:
+            value = currentCalendar
+        case .autoUpdateCalendar:
+            value = autoUpdateCalendar
+        case .preferredLang:
+            value = Locale.preferredLanguages.joined(separator: ", ")
+        case .preferredLocalizations:
+            value = Bundle.main.preferredLocalizations.joined(separator: ", ")
+        }
+        logs.append(LogEntry(message: "\(type.description): \(value)", type: type))
     }
+    
+    private func makeButton(for type: ButtonType) -> some View {
+        Button(action: {
+            self.log(type)
+        }) {
+            Text(type.varName)
+                .bold()
+                .fontWidth(Font.Width.condensed)
+                .minimumScaleFactor(0.75)
+                .lineLimit(2)
+                .padding()
+                .background(type.color)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+        }
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

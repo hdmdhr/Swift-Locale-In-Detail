@@ -1,0 +1,15 @@
+/*
+  Localizable.strings
+  LocaleInDetail
+
+  Created by Daniel Hu on 2023/09/04.
+  
+*/
+
+"current.locale" = "地域(現在)";
+"autoupdate.locale" = "自動更新地域";
+"current.calendar" = "カレンダー（現在）";
+"autoupdate.calendar" = "自動更新カレンダー";
+"preferred.languages" = "優先言語";
+"bundle.preferred.localizations" = "バンドル優先地域化";
+"console" = "コンソール";

@@ -25,23 +25,35 @@ struct ContentView: View {
         
         var varName: String {
             switch self {
-            case .currentLocale: return "Locale.current"
-            case .autoUpdateLocale: return "Locale.autoUpdatingCurrent"
-            case .currentCalendar: return "Calendar.current"
-            case .autoUpdateCalendar: return "Calendar.autoupdatingCurrent"
-            case .preferredLang: return "Locale.preferredLanguages"
-            case .preferredLocalizations: return "Bundle.main.preferredLocalizations"
+            case .currentLocale:
+                return "Locale.current"
+            case .autoUpdateLocale:
+                return "Locale.autoUpdatingCurrent"
+            case .currentCalendar:
+                return "Calendar.current"
+            case .autoUpdateCalendar:
+                return "Calendar.autoupdatingCurrent"
+            case .preferredLang:
+                return "Locale.preferredLanguages"
+            case .preferredLocalizations:
+                return "Bundle.main.preferredLocalizations"
             }
         }
         
         var description: String {
             switch self {
-            case .currentLocale: return "Current locale"
-            case .autoUpdateLocale: return "Auto update locale"
-            case .currentCalendar: return "Current calendar"
-            case .autoUpdateCalendar: return "Auto update calendar"
-            case .preferredLang: return "Preferred languages"
-            case .preferredLocalizations: return "Bundle preferred localizations"
+            case .currentLocale:
+                return NSLocalizedString("current.locale", comment: "")
+            case .autoUpdateLocale:
+                return NSLocalizedString("autoupdate.locale", comment: "")
+            case .currentCalendar:
+                return NSLocalizedString("current.calendar", comment: "")
+            case .autoUpdateCalendar:
+                return NSLocalizedString("autoupdate.calendar", comment: "")
+            case .preferredLang:
+                return NSLocalizedString("preferred.languages", comment: "")
+            case .preferredLocalizations:
+                return NSLocalizedString("bundle.preferred.localizations", comment: "")
             }
         }
         
@@ -80,7 +92,7 @@ struct ContentView: View {
             GeometryReader { geo in
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        Text("Console:")
+                        Text(NSLocalizedString("console", comment: ""))
                             .font(.headline)
                         Spacer()
                         Button(action: {

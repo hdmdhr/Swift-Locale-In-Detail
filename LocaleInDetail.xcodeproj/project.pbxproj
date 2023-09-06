@@ -13,6 +13,7 @@
 		8EFF7EA42AA5681900A58E51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EFF7EA32AA5681900A58E51 /* Preview Assets.xcassets */; };
 		8EFF7EAC2AA5962900A58E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFF7EAE2AA5962900A58E51 /* Localizable.strings */; };
 		8EFF7EB12AA5998B00A58E51 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF7EB02AA5998B00A58E51 /* ButtonType.swift */; };
+		8EFF7EE92AA8021400A58E51 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF7EE82AA8021400A58E51 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		8EFF7EAD2AA5962900A58E51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8EFF7EAF2AA5962E00A58E51 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8EFF7EB02AA5998B00A58E51 /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
+		8EFF7EE82AA8021400A58E51 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				8EFF7E9B2AA5681800A58E51 /* LocaleInDetailApp.swift */,
 				8EFF7E9D2AA5681800A58E51 /* ContentView.swift */,
 				8EFF7EB02AA5998B00A58E51 /* ButtonType.swift */,
+				8EFF7EE82AA8021400A58E51 /* Utils.swift */,
 				8EFF7E9F2AA5681900A58E51 /* Assets.xcassets */,
 				8EFF7EA12AA5681900A58E51 /* LocaleInDetail.entitlements */,
 				8EFF7EA22AA5681900A58E51 /* Preview Content */,
@@ -151,6 +154,7 @@
 				8EFF7E9E2AA5681800A58E51 /* ContentView.swift in Sources */,
 				8EFF7EB12AA5998B00A58E51 /* ButtonType.swift in Sources */,
 				8EFF7E9C2AA5681800A58E51 /* LocaleInDetailApp.swift in Sources */,
+				8EFF7EE92AA8021400A58E51 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

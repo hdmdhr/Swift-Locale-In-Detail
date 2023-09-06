@@ -7,13 +7,14 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     @State private var logs: [LogEntry] = []
 
     let currentLocale = Locale.current
-    let autoUpdateLocale = Locale.autoupdatingCurrent
+    let autoUpdatingLocale = Locale.autoupdatingCurrent
     let currentCalendar = Calendar.current
-    let autoUpdateCalendar = Calendar.autoupdatingCurrent
+    let autoUpdatingCalendar = Calendar.autoupdatingCurrent
     
     struct LogEntry: Identifiable {
         let id = UUID()
@@ -42,7 +43,7 @@ struct ContentView: View {
             GeometryReader { geo in
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        Text(NSLocalizedString("console", comment: ""))
+                        Text(NSLocalizedString("console", bundle: "ja".bundle, comment: ""))
                             .font(.headline)
                         Spacer()
                         Button(action: {
@@ -85,11 +86,11 @@ struct ContentView: View {
         case .currentLocale:
             value = currentLocale.identifier
         case .autoUpdateLocale:
-            value = autoUpdateLocale.identifier
+            value = autoUpdatingLocale.identifier
         case .currentCalendar:
             value = currentCalendar
         case .autoUpdateCalendar:
-            value = autoUpdateCalendar
+            value = autoUpdatingCalendar
         case .preferredLang:
             value = Locale.preferredLanguages.joined(separator: ", ")
         case .preferredLocalizations:
